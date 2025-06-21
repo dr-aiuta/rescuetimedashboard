@@ -84,3 +84,50 @@ export interface ApiError {
   status?: number;
   endpoint?: string;
 }
+
+// Goals System Types
+export type GoalType = 'more_than' | 'less_than';
+export type GoalCategory = 'productivity' | 'category' | 'activity' | 'total_time';
+export type GoalSchedule = 'workday' | 'weekend' | 'daily' | 'work_hours' | 'all_day';
+export type NotificationType = 'email' | 'desktop' | 'mobile' | 'none';
+
+export interface Goal {
+  id: string;
+  name: string;
+  type: GoalType;
+  targetHours: number;
+  targetMinutes?: number;
+  category: GoalCategory;
+  target: string; // e.g., "All Work", "Cursor", "Distracting"
+  schedule: GoalSchedule;
+  notifications: NotificationType[];
+  enabled: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface GoalStatus {
+  goalId: string;
+  date: string;
+  actualHours: number;
+  actualMinutes: number;
+  targetHours: number;
+  targetMinutes: number;
+  achieved: boolean;
+  progressPercentage: number;
+  timeRemaining?: number; // minutes remaining in day
+}
+
+export interface GoalProgress {
+  goal: Goal;
+  status: GoalStatus;
+  todayData: {
+    totalSeconds: number;
+    relevantActivities: CategoryData[] | ProductivityData[];
+  };
+}
+
+// Enhanced Dashboard Data with Goals
+export interface GoalsDashboardData extends DashboardData {
+  goals: GoalProgress[];
+}

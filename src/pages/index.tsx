@@ -51,11 +51,16 @@ const Dashboard: React.FC<DashboardProps> = ({ initialData, dateRange }) => {
               {dateRange} • {totalDays} days • {totalHours.toFixed(1)} total hours
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 align-items-center">
             <Badge bg="primary">{avgHoursPerDay.toFixed(1)}h avg/day</Badge>
             <Badge bg={avgProductivity >= 0 ? 'success' : 'warning'}>
               {avgProductivity >= 0 ? '+' : ''}{avgProductivity.toFixed(1)} productivity
             </Badge>
+            <div className="ms-3">
+              <a href="/goals" className="btn btn-outline-success btn-sm">
+                🎯 Daily Goals
+              </a>
+            </div>
           </div>
         </div>
 
