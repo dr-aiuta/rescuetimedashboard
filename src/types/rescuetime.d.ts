@@ -20,7 +20,7 @@ export interface DailySummary {
   date: string;
   totalSeconds: number;
   totalHours: number;
-  notes?: string;
+  notes?: string | null;
 }
 
 export interface ProductivityData {
@@ -28,7 +28,7 @@ export interface ProductivityData {
   activity: string;
   seconds: number;
   hours: number;
-  productivityScore: number;
+  productivityScore: number | null;
   category?: string;
 }
 
@@ -49,12 +49,12 @@ export interface DashboardData {
 
 // API Query Parameters
 export interface RescueTimeQuery {
-  perspective: 'rank' | 'interval';
-  resolution_time: 'day' | 'week' | 'month';
+  perspective: "rank" | "interval";
+  resolution_time: "day" | "week" | "month";
   restrict_begin?: string; // YYYY-MM-DD
   restrict_end?: string; // YYYY-MM-DD
-  restrict_kind?: 'category' | 'activity' | 'productivity';
-  format: 'json';
+  restrict_kind?: "category" | "activity" | "productivity";
+  format: "json";
 }
 
 // Chart Data Types
@@ -77,7 +77,7 @@ export interface DateRange {
   end: Date;
 }
 
-export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
+export type LoadingState = "idle" | "loading" | "success" | "error";
 
 export interface ApiError {
   message: string;
@@ -86,10 +86,19 @@ export interface ApiError {
 }
 
 // Goals System Types
-export type GoalType = 'more_than' | 'less_than';
-export type GoalCategory = 'productivity' | 'category' | 'activity' | 'total_time';
-export type GoalSchedule = 'workday' | 'weekend' | 'daily' | 'work_hours' | 'all_day';
-export type NotificationType = 'email' | 'desktop' | 'mobile' | 'none';
+export type GoalType = "more_than" | "less_than";
+export type GoalCategory =
+  | "productivity"
+  | "category"
+  | "activity"
+  | "total_time";
+export type GoalSchedule =
+  | "workday"
+  | "weekend"
+  | "daily"
+  | "work_hours"
+  | "all_day";
+export type NotificationType = "email" | "desktop" | "mobile" | "none";
 
 export interface Goal {
   id: string;

@@ -22,9 +22,11 @@ interface DashboardProps {
 const Dashboard: React.FC<DashboardProps> = ({ initialData, dateRange }) => {
   const [activeTab, setActiveTab] = useState('overview');
   
-  const { data, error, isLoading, mutate } = useRescueTime();
-  const dashboardData = data || initialData;
+  // Use only server-side data to avoid client-side API calls
+  const dashboardData = initialData;
   const chartData = useChartData(dashboardData);
+  const error = null;
+  const isLoading = false;
 
   // Calculate summary stats
   const totalHours = dashboardData?.summary.reduce((sum, day) => sum + day.totalHours, 0) || 0;
@@ -32,7 +34,7 @@ const Dashboard: React.FC<DashboardProps> = ({ initialData, dateRange }) => {
   const avgHoursPerDay = totalDays > 0 ? totalHours / totalDays : 0;
   
   const avgProductivity = dashboardData?.productivity.length > 0 
-    ? dashboardData.productivity.reduce((sum, item) => sum + item.productivityScore, 0) / dashboardData.productivity.length
+    ? dashboardData.productivity.reduce((sum, item) => sum + (item.productivityScore || 0), 0) / dashboardData.productivity.length
     : 0;
 
   return (
@@ -68,7 +70,7 @@ const Dashboard: React.FC<DashboardProps> = ({ initialData, dateRange }) => {
           {error && (
             <ErrorAlert 
               error={error} 
-              onRetry={() => mutate()} 
+              onRetry={() => window.location.reload()} 
               dismissible 
             />
           )}

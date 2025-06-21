@@ -141,21 +141,13 @@ const GoalCardComponent: React.FC<{ goalProgress: GoalProgress }> = ({ goalProgr
 };
 
 const GoalsPage: React.FC<GoalsPageProps> = ({ initialData }) => {
-  const { data, error, isLoading, mutate } = useRescueTime();
+  // Use only server-side data to avoid client-side API calls
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
   
-  const dashboardData = data || initialData;
+  const dashboardData = initialData;
   const goalsProgress = calculateGoalsProgress(dashboardData);
-
-  // Auto-refresh every 5 minutes
-  useEffect(() => {
-    const interval = setInterval(() => {
-      mutate();
-      setLastUpdated(new Date());
-    }, 5 * 60 * 1000); // 5 minutes
-
-    return () => clearInterval(interval);
-  }, [mutate]);
+  const error = null;
+  const isLoading = false;
 
   const totalGoals = goalsProgress.length;
   const achievedGoals = goalsProgress.filter(g => g.status.achieved).length;
@@ -188,8 +180,7 @@ const GoalsPage: React.FC<GoalsPageProps> = ({ initialData }) => {
               variant="outline-primary" 
               size="sm" 
               onClick={() => {
-                mutate();
-                setLastUpdated(new Date());
+                window.location.reload();
               }}
               disabled={isLoading}
             >
