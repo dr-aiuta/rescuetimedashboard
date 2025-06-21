@@ -10,26 +10,32 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "next": "^15.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "typescript": "^5.7.3",
-    "@types/react": "^19.0.1",
     "@types/node": "^22.10.6",
+    "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
-    "react-bootstrap": "^2.11.1",
     "bootstrap": "^5.3.3",
-    "recharts": "^2.14.1",
-    "swr": "^2.3.0",
     "dotenv": "^16.4.7",
     "eslint": "^9.18.0",
-    "eslint-config-next": "^15.1.6"
+    "eslint-config-next": "^15.1.6",
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.0.0",
+    "recharts": "^2.14.1",
+    "swr": "^2.3.0",
+    "typescript": "^5.7.3"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dr-aiuta/rescuetimedashboard.git"
   },
-  "keywords": ["rescuetime", "dashboard", "nextjs", "typescript", "productivity"],
+  "keywords": [
+    "rescuetime",
+    "dashboard",
+    "nextjs",
+    "typescript",
+    "productivity"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
